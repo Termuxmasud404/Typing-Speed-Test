@@ -5,156 +5,199 @@
   <style>
     :root {
       --light-bg: #f0f9ff;
-      --light-color: #1f2937;
-      --dark-bg: #1e293b;
-      --dark-color: #f8fafc;
-    }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: var(--light-bg);
-      text-align: center;
-      padding: 30px;
-      color: var(--light-color);
-      transition: all 0.3s ease;
-    }
-    body.dark {
-      background: var(--dark-bg);
-      color: var(--dark-color);
-    }
-    header img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #3b82f6;
-    }
-    header h1 {
-      font-size: 28px;
-      color: #1d4ed8;
-    }
-    header p {
-      font-weight: bold;
-      color: #555;
-    }
-    #quote {
-      font-size: 20px;
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      max-width: 700px;
-      margin: 20px auto;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    #caption {
-      font-size: 16px;
-      margin-top: 10px;
-      color: #2563eb;
-      font-style: italic;
-    }
-    #input {
-      width: 90%;
-      max-width: 700px;
-      padding: 12px;
-      font-size: 18px;
-      border: 2px solid #60a5fa;
-      border-radius: 6px;
-      margin-top: 10px;
-    }
-    .wrong {
-      border-color: red !important;
-    }
-    button {
-      margin-top: 20px;
-      padding: 10px 25px;
-      background-color: #2563eb;
-      color: white;
-      border: none;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-    #keyboard {
-      margin-top: 20px;
-    }
-    .key {
-      display: inline-block;
-      padding: 10px 15px;
-      margin: 5px;
-      background: #e2e8f0;
-      border-radius: 5px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .key:hover {
-      background: #cbd5e1;
-    }
-    #stats, #leaderboard {
-      margin-top: 20px;
-      font-size: 18px;
-    }
-    #facebook a {
-      display: inline-block;
-      margin-top: 20px;
-      background: #1877f2;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-    }
-    footer {
-      margin-top: 40px;
-      font-size: 15px;
-      color: #555;
-    }
-    footer strong {
-      display: block;
-      margin-bottom: 4px;
-    }
-    footer span {
-      font-size: 14px;
-      color: #6b7280;
-    }
-    .fade {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.6s ease;
-    }
-    .fade.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+      --light-text: #333;
+      --dark-bg: #0f172a;
+      --dark-text: #f8fafc;
+      --primary: #3b82f6;
+    }body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e0f2fe, var(--light-bg));
+  text-align: center;
+  padding: 30px;
+  color: var(--light-text);
+  transition: all 0.4s ease;
+}
+
+body.dark-mode {
+  background: linear-gradient(to right, #1e293b, var(--dark-bg));
+  color: var(--dark-text);
+}
+
+.toggle-mode {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 15px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+}
+
+header h1 {
+  font-size: 28px;
+  color: #1d4ed8;
+}
+
+#quote {
+  font-size: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 20px auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#caption {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #2563eb;
+  font-style: italic;
+}
+
+#input {
+  width: 90%;
+  max-width: 700px;
+  padding: 12px;
+  font-size: 18px;
+  border: 2px solid #60a5fa;
+  border-radius: 6px;
+  margin-top: 10px;
+}
+
+.keyboard-box {
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 750px;
+}
+
+.key {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  color: #1e3a8a;
+  font-weight: bold;
+}
+
+.key:hover {
+  background: #cbd5e1;
+}
+
+#stats {
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+#facebook a {
+  display: inline-block;
+  margin-top: 20px;
+  background: #1877f2;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+#developer {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+footer {
+  margin-top: 40px;
+  font-size: 15px;
+  color: #555;
+}
+
+footer strong {
+  display: block;
+  margin-bottom: 4px;
+}
+
+footer span {
+  font-size: 14px;
+  color: #6b7280;
+}
+
   </style>
 </head>
 <body>
-  <button onclick="toggleMode()">Light/Dark Mode</button>
-  <header class="fade">
+  <button class="toggle-mode" onclick="toggleMode()">Toggle Mode</button>
+  <header>
     <img src="masud.jpg" alt="Masud Rana">
     <h1>The Dream Chaser</h1>
-    <p>Developer By Masud Rana</p>
-  </header>
-  <div id="quote" class="fade">Click "Start Test" to begin typing...</div>
-  <div id="caption" class="fade">"Practice every day. Greatness takes time."</div>
-  <input type="text" id="input" placeholder="Start typing here..." disabled>
-  <div id="keyboard" class="fade"></div>
-  <button onclick="startTest()">Start Test</button>
-  <div id="stats"></div>
-  <div id="leaderboard"></div>
-  <div id="facebook">
+  </header>  <div id="quote">Click "Start Test" to begin typing...</div>
+  <div id="caption">"Practice every day. Greatness takes time."</div>  <input type="text" id="input" placeholder="Start typing here..." disabled>  <div class="keyboard-box" id="keyboard-upper"></div>
+  <div class="keyboard-box" id="keyboard-lower"></div><button onclick="startTest()">Start Test</button>
+
+  <div id="stats"></div>  <div id="facebook">
     <a href="https://www.facebook.com/profile.php?id=61576159807112" target="_blank">Visit My Facebook</a>
   </div>
-  <footer>
+  <div id="developer">Developer By Masud Rana</div>  <footer>
     <strong>© 2025 The Dream Chaser Zone</strong>
     <span>Created by Termuxmasud404</span>
-  </footer>
-  <script>
-    const quotes = ["The quick brown fox jumps over the lazy dog", "Typing speed is fun to measure and improve", "Practice makes a man perfect in every skill", "JavaScript is powerful and versatile", "Your future is created by what you do today"];
-    const captions = ["Type like a pro!", "Stay focused. Keep typing!", "You're improving every second!", "Don't give up!", "Fast fingers, sharp mind!"];
+  </footer>  <script>
+    const quotes = [
+      "The quick brown fox jumps over the lazy dog",
+      "Typing speed is fun to measure and improve",
+      "Practice makes a man perfect in every skill",
+      "JavaScript is powerful and versatile",
+      "Your future is created by what you do today",
+      "Stay positive, work hard, make it happen",
+      "Success doesn't come to you. You go to it.",
+      "Every day is a second chance",
+      "Dream big, work bigger",
+      "Typing helps you think better",
+      "Accuracy is more important than speed",
+      "Be consistent, not perfect",
+      "Fail, learn, improve, repeat",
+      "Programming is a superpower",
+      "Create more, consume less",
+      "Your mind is your best tool",
+      "Keep typing until it becomes effortless",
+      "Make your fingers fly",
+      "You can achieve anything with practice",
+      "Discipline beats motivation"
+      // Add more up to 100 as needed...
+    ];
+
+    const captions = [
+      "Type like a pro!",
+      "Stay focused. Keep typing!",
+      "You're improving every second!",
+      "Don't give up!",
+      "Fast fingers, sharp mind!"
+    ];
+
+    const upperKeys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const lowerKeys = 'abcdefghijklmnopqrstuvwxyz'.split('');
+
+    const keyboardUpper = document.getElementById("keyboard-upper");
+    const keyboardLower = document.getElementById("keyboard-lower");
     const inputEl = document.getElementById("input");
     const quoteEl = document.getElementById("quote");
     const captionEl = document.getElementById("caption");
     const statsEl = document.getElementById("stats");
-    const leaderboardEl = document.getElementById("leaderboard");
-    const keyboard = document.getElementById("keyboard");
-    let startTime = 0, currentQuote = "";
+
+    let startTime = 0;
+    let currentQuote = "";
+
     function startTest() {
       currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
       quoteEl.innerText = currentQuote;
@@ -163,57 +206,44 @@
       inputEl.disabled = false;
       inputEl.focus();
       statsEl.innerText = "";
-      inputEl.classList.remove("wrong");
       startTime = new Date().getTime();
     }
+
     inputEl.addEventListener("input", () => {
-      const val = inputEl.value;
-      if (!currentQuote.startsWith(val)) {
-        inputEl.classList.add("wrong");
-      } else {
-        inputEl.classList.remove("wrong");
-      }
-      if (val === currentQuote) {
+      const typed = inputEl.value;
+      if (typed === currentQuote) {
         const endTime = new Date().getTime();
         const timeTaken = (endTime - startTime) / 1000;
-        const words = val.trim().split(/\s+/).length;
+        const words = typed.trim().split(/\s+/).length;
         const wpm = Math.round((words / timeTaken) * 60);
-        const accuracy = Math.round((val.length / currentQuote.length) * 100);
-        statsEl.innerHTML = `Time: ${timeTaken.toFixed(2)}s<br>Speed: ${wpm} WPM<br>Accuracy: ${accuracy}%`;
+        const accuracy = Math.round((typed.length / currentQuote.length) * 100);
+        statsEl.innerHTML = `Time: ${timeTaken.toFixed(2)} sec <br>Speed: ${wpm} WPM <br>Accuracy: ${accuracy}%`;
         inputEl.disabled = true;
-        leaderboardEl.innerHTML = `<h3>Leaderboard</h3><p>You: ${wpm} WPM (${accuracy}%)</p>`;
-        new Audio("https://www.soundjay.com/button/sounds/button-3.mp3").play();
+      } else {
+        inputEl.style.borderColor = typed === currentQuote.substring(0, typed.length) ? '#60a5fa' : 'red';
       }
     });
+
+    function createKeyboard(layout, container) {
+      layout.forEach(key => {
+        const keyButton = document.createElement("div");
+        keyButton.className = "key";
+        keyButton.innerText = key;
+        keyButton.onclick = () => {
+          if (!inputEl.disabled) {
+            inputEl.value += key;
+            inputEl.dispatchEvent(new Event('input'));
+          }
+        };
+        container.appendChild(keyButton);
+      });
+    }
+
+    createKeyboard(upperKeys, keyboardUpper);
+    createKeyboard(lowerKeys, keyboardLower);
+
     function toggleMode() {
-      document.body.classList.toggle("dark");
+      document.body.classList.toggle("dark-mode");
     }
-    function createKeyboards() {
-      const layouts = [[...'abcdefghijklmnopqrstuvwxyz'], [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ']];
-      layouts.forEach(layout => {
-        layout.forEach(char => {
-          const keyBtn = document.createElement("div");
-          keyBtn.className = "key";
-          keyBtn.textContent = char;
-          keyBtn.onclick = () => {
-            if (!inputEl.disabled) {
-              inputEl.value += char;
-              inputEl.dispatchEvent(new Event("input"));
-            }
-          };
-          keyboard.appendChild(keyBtn);
-        });
-        keyboard.appendChild(document.createElement("br"));
-      });
-    }
-    createKeyboards();
-    const fadeEls = document.querySelectorAll('.fade');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('show');
-      });
-    }, { threshold: 0.1 });
-    fadeEls.forEach(el => observer.observe(el));
-  </script>
-</body>
+  </script></body>
 </html>
