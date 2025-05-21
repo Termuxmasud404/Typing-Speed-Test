@@ -1,330 +1,356 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>The Dream Chaser - Typing Speed Test</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Segoe+UI&display=swap');
+  <meta charset="UTF-8">
+  <title>The Dream Chaser - Typing Speed Test</title>
+  <style>
+    :root {
+      --light-bg: #f0f9ff;
+      --light-text: #333;
+      --dark-bg: #0f172a;
+      --dark-text: #f8fafc;
+      --primary: #3b82f6;
+    }body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to right, #e0f2fe, var(--light-bg));
+  text-align: center;
+  padding: 30px;
+  color: var(--light-text);
+  transition: all 0.4s ease;
+}
 
-  body {
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to right, #e0f2fe, #f0f9ff);
-    text-align: center;
-    padding: 30px;
-    color: #333;
-    transition: background-color 0.5s, color 0.5s;
-  }
+body.dark-mode {
+  background: linear-gradient(to right, #1e293b, var(--dark-bg));
+  color: var(--dark-text);
+}
 
-  body.dark {
-    background: #121212;
-    color: #ddd;
-  }
+.toggle-mode {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  padding: 8px 15px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
-  header {
-    position: relative;
-    margin-bottom: 20px;
-  }
+header img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+}
 
-  header img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    border: 3px solid #3b82f6;
-  }
+header h1 {
+  font-size: 28px;
+  color: #1d4ed8;
+}
 
-  header h1 {
-    font-size: 28px;
-    color: #1d4ed8;
-    margin: 10px 0;
-    animation: slowBlink 4s infinite;
-  }
+#quote {
+  font-size: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 700px;
+  margin: 20px auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
 
-  body.dark header h1 {
-    color: #90cdf4;
-  }
+#caption {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #2563eb;
+  font-style: italic;
+}
 
-  header p {
-    font-weight: bold;
-    color: #555;
-    margin-top: 70px; /* নিচে নামের জন্য জায়গা */
-  }
+#input {
+  width: 90%;
+  max-width: 700px;
+  padding: 12px;
+  font-size: 18px;
+  border: 2px solid #60a5fa;
+  border-radius: 6px;
+  margin-top: 10px;
+}
 
-  body.dark header p {
-    color: #a0aec0;
-  }
+.keyboard-box {
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 10px;
+  margin: 10px auto;
+  max-width: 750px;
+}
 
-  #modeToggle {
-    position: fixed;
-    top: 15px;
-    right: 15px;
-    padding: 8px 16px;
-    background: #2563eb;
-    border: none;
-    color: white;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 999;
-    transition: background-color 0.3s;
-  }
+.key {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  background: #e2e8f0;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+  color: #1e3a8a;
+  font-weight: bold;
+}
 
-  #modeToggle:hover {
-    background: #1e40af;
-  }
+.key:hover {
+  background: #cbd5e1;
+}
 
-  #quote {
-    font-size: 20px;
-    background: #fff;
-    padding: 15px;
-    border-radius: 10px;
-    max-width: 700px;
-    margin: 20px auto;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-    animation: rainbowText 5s linear infinite;
-  }
+#stats {
+  margin-top: 20px;
+  font-size: 18px;
+}
 
-  body.dark #quote {
-    background: transparent;
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-  }
+#facebook a {
+  display: inline-block;
+  margin-top: 20px;
+  background: #1877f2;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+}
 
-  #caption {
-    font-size: 16px;
-    margin-top: 10px;
-    color: #2563eb;
-    font-style: italic;
-    min-height: 24px;
-  }
+#developer {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #555;
+}
 
-  body.dark #caption {
-    color: #90cdf4;
-  }
+footer {
+  margin-top: 40px;
+  font-size: 15px;
+  color: #555;
+}
 
-  #input {
-    width: 90%;
-    max-width: 700px;
-    padding: 12px;
-    font-size: 18px;
-    border: 2px solid #60a5fa;
-    border-radius: 6px;
-    margin-top: 10px;
-    outline: none;
-    transition: border-color 0.3s;
-  }
+footer strong {
+  display: block;
+  margin-bottom: 4px;
+}
 
-  #input.error {
-    border-color: #dc2626;
-    background-color: #fee2e2;
-  }
+footer span {
+  font-size: 14px;
+  color: #6b7280;
+}
 
-  #input:focus {
-    border-color: #2563eb;
-  }
-
-  button#startTestBtn {
-    margin-top: 20px;
-    padding: 12px 30px;
-    background-color: #2563eb;
-    color: white;
-    border: none;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  button#startTestBtn:hover {
-    background-color: #1e40af;
-  }
-
-  #keyboard {
-    margin-top: 25px;
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .keyboard-row {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-
-  .key {
-    flex: 1;
-    max-width: 50px;
-    padding: 12px 0;
-    background: #e2e8f0;
-    border-radius: 5px;
-    cursor: pointer;
-    user-select: none;
-    font-weight: bold;
-    color: #2563eb;
-    text-transform: uppercase;
-    transition: background-color 0.3s;
-  }
-
-  .key:hover {
-    background: #cbd5e1;
-  }
-
-  body.dark .key {
-    background: #2d3748;
-    color: #90cdf4;
-  }
-
-  body.dark .key:hover {
-    background: #4a5568;
-  }
-
-  #stats {
-    margin-top: 20px;
-    font-size: 18px;
-  }
-
-  #facebook {
-    margin-top: 30px;
-  }
-
-  #facebook a {
-    display: inline-block;
-    background: #1877f2;
-    color: white;
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
-  }
-
-  #facebook a:hover {
-    background: #145dbf;
-  }
-
-  footer {
-    margin-top: 50px;
-    font-size: 15px;
-    color: #555;
-  }
-
-  body.dark footer {
-    color: #a0aec0;
-  }
-
-  footer strong {
-    display: block;
-    margin-bottom: 6px;
-  }
-
-  footer span {
-    font-size: 14px;
-    color: #6b7280;
-  }
-
-  /* Rainbow text animation */
-  @keyframes rainbowText {
-    0%,100%{background-position:0 0;}
-    50%{background-position:100% 0;}
-  }
-  #quote {
-    background: linear-gradient(90deg, 
-      red,orange,yellow,green,blue,indigo,violet);
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: rainbowText 6s linear infinite;
-  }
-
-  /* Slow blink animation for header h1 */
-  @keyframes slowBlink {
-    0%, 100% {opacity: 1;}
-    50% {opacity: 0.2;}
-  }
-
-  /* Scroll animation for #quote and #caption */
-  #quote, #caption {
-    opacity: 0;
-    transform: translateY(20px);
-    animation-fill-mode: forwards;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-  }
-
-  #quote.visible {
-    animation-name: fadeInUp;
-  }
-
-  #caption.visible {
-    animation-name: fadeInUp;
-    animation-delay: 0.3s;
-  }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-</style>
+  </style>
 </head>
 <body>
+  <button class="toggle-mode" onclick="toggleMode()">Toggle Mode</button>
+  <header>
+    <img src="masud.jpg" alt="Masud Rana">
+    <h1>The Dream Chaser</h1>
+  </header>  <div id="quote">Click "Start Test" to begin typing...</div>
+  <div id="caption">"Practice every day. Greatness takes time."</div>  <input type="text" id="input" placeholder="Start typing here..." disabled>  <div class="keyboard-box" id="keyboard-upper"></div>
+  <div class="keyboard-box" id="keyboard-lower"></div><button onclick="startTest()">Start Test</button>
 
-<button id="modeToggle">Dark Mode</button>
+  <div id="stats"></div>  <div id="facebook">
+    <a href="https://www.facebook.com/profile.php?id=61576159807112" target="_blank">Visit My Facebook</a>
+  </div>
+  <div id="developer">Developer By Masud Rana</div>  <footer>
+    <strong>© 2025 The Dream Chaser Zone</strong>
+    <span>Created by Termuxmasud404</span>
+  </footer>  <script>
+const quotes = [
+  "Practice makes perfect.",
+  "Consistency is the key to success.",
+  "Never stop learning.",
+  "Mistakes help you grow.",
+  "Believe in yourself.",
+  "Hard work beats talent.",
+  "Stay focused and never give up.",
+  "Success comes with patience.",
+  "Dream big, work hard.",
+  "Failure is the stepping stone to success.",
+  "Learn from your mistakes.",
+  "Keep pushing your limits.",
+  "Every day is a new opportunity.",
+  "Be the best version of yourself.",
+  "Stay positive, work hard.",
+  "Don't fear failure.",
+  "Success requires dedication.",
+  "Perseverance conquers all.",
+  "Keep moving forward.",
+  "Success is earned, not given.",
+  "Hard work never goes unnoticed.",
+  "Believe, achieve, succeed.",
+  "Focus on your goals.",
+  "Never quit on your dreams.",
+  "The journey is the reward.",
+  "Be patient and persistent.",
+  "Challenges make you stronger.",
+  "Stay motivated and focused.",
+  "Work smart and hard.",
+  "Success demands sacrifice.",
+  "Keep learning every day.",
+  "Your attitude determines your direction.",
+  "Small steps lead to big results.",
+  "Stay humble and hungry.",
+  "Positive mind, positive life.",
+  "Be fearless in pursuit of what sets your soul on fire.",
+  "Failure teaches success.",
+  "Chase your dreams relentlessly.",
+  "Embrace the process.",
+  "Your only limit is you.",
+  "Never stop improving.",
+  "Make today count.",
+  "Dream it. Wish it. Do it.",
+  "Be stronger than your excuses.",
+  "Take the risk or lose the chance.",
+  "Success is a journey, not a destination.",
+  "Hard work creates opportunity.",
+  "Be bold, be brave.",
+  "Keep your eyes on the prize.",
+  "Success favors the persistent.",
+  "Great things take time.",
+  "Work until your idols become rivals.",
+  "Strive for progress, not perfection.",
+  "Success is built on failure.",
+  "Believe in your potential.",
+  "Don’t watch the clock; do what it does—keep going.",
+  "Push yourself, because no one else will.",
+  "The harder you work, the luckier you get.",
+  "Success starts with self-discipline.",
+  "Don't limit your challenges, challenge your limits.",
+  "Be patient. Be persistent.",
+  "Make failure your teacher.",
+  "Every expert was once a beginner.",
+  "Success requires courage.",
+  "Don't stop until you're proud.",
+  "Take action, no excuses.",
+  "Your passion fuels success.",
+  "Be dedicated and unstoppable.",
+  "Progress over perfection.",
+  "Success is earned daily.",
+  "Work hard in silence, let success make the noise.",
+  "Stay focused, stay humble.",
+  "Learn, grow, repeat.",
+  "Never settle for less.",
+  "Keep grinding, keep shining.",
+  "Success is the best revenge.",
+  "Dream, plan, execute.",
+  "Hustle in silence, let your success roar.",
+  "The secret of success is consistency.",
+  "Success is not for the lazy.",
+  "Push past your comfort zone.",
+  "Embrace the struggle.",
+  "Work hard, stay humble.",
+  "Success requires persistence.",
+  "Stay strong, stay positive.",
+  "Make your dreams a reality.",
+  "Work hard, dream big.",
+  "Turn dreams into plans.",
+  "Be unstoppable.",
+  "Success is a mindset.",
+  "Your effort determines your outcome.",
+  "Believe, work, achieve.",
+  "Stay hungry, stay foolish.",
+  "Great things never come from comfort zones.",
+  "Success is the sum of small efforts.",
+  "Focus on what matters.",
+  "Discipline equals freedom.",
+  "Success takes sacrifice.",
+  "Be relentless.",
+  "Start where you are.",
+  "Dreams don't work unless you do.",
+  "Success is built daily.",
+  "Never give up on yourself.",
+  "The best way to predict the future is to create it.",
+  "Stay focused on your goals.",
+  "Be the energy you want to attract."
+];
+      "The quick brown fox jumps over the lazy dog",
+      "Typing speed is fun to measure and improve",
+      "Practice makes a man perfect in every skill",
+      "JavaScript is powerful and versatile",
+      "Your future is created by what you do today",
+      "Stay positive, work hard, make it happen",
+      "Success doesn't come to you. You go to it.",
+      "Every day is a second chance",
+      "Dream big, work bigger",
+      "Typing helps you think better",
+      "Accuracy is more important than speed",
+      "Be consistent, not perfect",
+      "Fail, learn, improve, repeat",
+      "Programming is a superpower",
+      "Create more, consume less",
+      "Your mind is your best tool",
+      "Keep typing until it becomes effortless",
+      "Make your fingers fly",
+      "You can achieve anything with practice",
+      "Discipline beats motivation"
+      // Add more up to 100 as needed...
+    ];
 
-<header>
-  <img src="masud.jpg" alt="Masud Rana" />
-  <h1>The Dream Chaser - Typing Speed Test</h1>
-  <p>Developer By Masud Rana</p>
-</header>
+    const captions = [
+      "Type like a pro!",
+      "Stay focused. Keep typing!",
+      "You're improving every second!",
+      "Don't give up!",
+      "Fast fingers, sharp mind!"
+    ];
 
-<div id="quote">Click "Start Test" to begin typing...</div>
-<div id="caption">"Practice every day. Greatness takes time."</div>
+    const upperKeys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+    const lowerKeys = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
-<input type="text" id="input" placeholder="Start typing here..." disabled />
+    const keyboardUpper = document.getElementById("keyboard-upper");
+    const keyboardLower = document.getElementById("keyboard-lower");
+    const inputEl = document.getElementById("input");
+    const quoteEl = document.getElementById("quote");
+    const captionEl = document.getElementById("caption");
+    const statsEl = document.getElementById("stats");
 
-<div id="keyboard">
-  <div class="keyboard-row" id="row1"></div>
-  <div class="keyboard-row" id="row2"></div>
-  <div class="keyboard-row" id="row3"></div>
-</div>
+    let startTime = 0;
+    let currentQuote = "";
 
-<button id="startTestBtn">Start Test</button>
+    function startTest() {
+      currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.innerText = currentQuote;
+      captionEl.innerText = captions[Math.floor(Math.random() * captions.length)];
+      inputEl.value = "";
+      inputEl.disabled = false;
+      inputEl.focus();
+      statsEl.innerText = "";
+      startTime = new Date().getTime();
+    }
 
-<div id="stats"></div>
+    inputEl.addEventListener("input", () => {
+      const typed = inputEl.value;
+      if (typed === currentQuote) {
+        const endTime = new Date().getTime();
+        const timeTaken = (endTime - startTime) / 1000;
+        const words = typed.trim().split(/\s+/).length;
+        const wpm = Math.round((words / timeTaken) * 60);
+        const accuracy = Math.round((typed.length / currentQuote.length) * 100);
+        statsEl.innerHTML = `Time: ${timeTaken.toFixed(2)} sec <br>Speed: ${wpm} WPM <br>Accuracy: ${accuracy}%`;
+        inputEl.disabled = true;
+      } else {
+        inputEl.style.borderColor = typed === currentQuote.substring(0, typed.length) ? '#60a5fa' : 'red';
+      }
+    });
 
-<div id="facebook">
-  <a href="https://www.facebook.com/profile.php?id=61576159807112" target="_blank">Visit My Facebook</a>
-</div>
+    function createKeyboard(layout, container) {
+      layout.forEach(key => {
+        const keyButton = document.createElement("div");
+        keyButton.className = "key";
+        keyButton.innerText = key;
+        keyButton.onclick = () => {
+          if (!inputEl.disabled) {
+            inputEl.value += key;
+            inputEl.dispatchEvent(new Event('input'));
+          }
+        };
+        container.appendChild(keyButton);
+      });
+    }
 
-<footer>
-  <strong>© 2025 The Dream Chaser Zone</strong>
-  <span>Created by Termuxmasud404</span>
-</footer>
+    createKeyboard(upperKeys, keyboardUpper);
+    createKeyboard(lowerKeys, keyboardLower);
 
-<script>
-  // Quotes 100 টা রঙধনু কালারে
-  const quotes = [
-    "The quick brown fox jumps over the lazy dog",
-    "Typing speed is fun to measure and improve",
-    "Practice makes a man perfect in every skill",
-    "JavaScript is powerful and versatile",
-    "Your future is created by what you do today",
-    "Don't watch the clock; do what it does. Keep going.",
-    "Hard work beats talent when talent doesn't work hard.",
-    "Success is not for the lazy.",
-    "Every moment is a fresh beginning.",
-    "Believe you can and you're halfway there.",
-    "Dream big and dare to fail.",
-    "The harder you work, the luckier you get.",
-    "Do what you can with all you have.",
-    "Great things never come from comfort zones.",
-    "Push yourself,
+    function toggleMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+  </script></body>
+</html>
