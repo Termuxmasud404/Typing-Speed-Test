@@ -2,99 +2,151 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>The Dream Chaser - Typing Test</title>
+  <title>The Dream Chaser - Typing Speed Test</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f2fe, #f0f9ff);
       text-align: center;
-      padding: 40px;
-      background: #f0f0f0;
+      padding: 30px;
+      color: #333;
     }
 
     header img {
-      width: 80px;
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
+      border: 3px solid #3b82f6;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #1d4ed8;
+    }
+
+    header p {
+      font-weight: bold;
+      color: #555;
     }
 
     #quote {
       font-size: 20px;
-      margin-bottom: 20px;
       background: #fff;
-      padding: 20px;
+      padding: 15px;
       border-radius: 10px;
-      display: inline-block;
+      max-width: 700px;
+      margin: 20px auto;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    #caption {
+      font-size: 16px;
+      margin-top: 10px;
+      color: #2563eb;
+      font-style: italic;
     }
 
     #input {
-      width: 100%;
-      max-width: 600px;
+      width: 90%;
+      max-width: 700px;
       padding: 12px;
       font-size: 18px;
-      border-radius: 5px;
-    }
-
-    #stats {
-      margin-top: 15px;
-      font-size: 17px;
+      border: 2px solid #60a5fa;
+      border-radius: 6px;
+      margin-top: 10px;
     }
 
     button {
       margin-top: 20px;
-      padding: 10px 20px;
+      padding: 10px 25px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
     }
 
-    #timer {
-      font-size: 18px;
-      margin-top: 10px;
-      color: #d9534f;
+    #keyboard {
+      margin-top: 20px;
     }
 
-    #facebook {
-      margin-top: 30px;
+    .key {
+      display: inline-block;
+      padding: 10px 15px;
+      margin: 5px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .key:hover {
+      background: #cbd5e1;
+    }
+
+    #stats {
+      margin-top: 20px;
+      font-size: 18px;
     }
 
     #facebook a {
-      text-decoration: none;
-      background-color: #1877f2;
+      display: inline-block;
+      margin-top: 20px;
+      background: #1877f2;
       color: white;
       padding: 10px 15px;
-      border-radius: 6px;
-      font-weight: bold;
+      border-radius: 5px;
+      text-decoration: none;
     }
 
     footer {
       margin-top: 40px;
-      font-weight: bold;
+      font-size: 15px;
       color: #555;
+    }
+
+    footer strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    footer span {
+      font-size: 14px;
+      color: #6b7280;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <img src="your-photo-url.jpg" alt="Masud Rana">
-    <h2>The Dream Chaser</h2>
+    <img src="masud.jpg" alt="Masud Rana">
+    <h1>The Dream Chaser</h1>
+    <p>Developer By Masud Rana</p>
   </header>
 
-  <div id="quote">Click Start to begin typing...</div>
+  <div id="quote">Click "Start Test" to begin typing...</div>
+  <div id="caption">"Practice every day. Greatness takes time."</div>
+
   <input type="text" id="input" placeholder="Start typing here..." disabled>
-  <div id="timer">Time Left: 30s</div>
-  <div id="stats"></div>
+
+  <div id="keyboard"></div>
+
   <button onclick="startTest()">Start Test</button>
 
+  <div id="stats"></div>
+
   <div id="facebook">
-    <a href="https://www.facebook.com/your-profile" target="_blank">Visit My Facebook</a>
+    <a href="https://www.facebook.com/profile.php?id=61576159807112" target="_blank">Visit My Facebook</a>
   </div>
 
   <footer>
-    Created by Masud Rana
+    <strong>© 2025 The Dream Chaser Zone</strong>
+    <span>Created by Termuxmasud404</span>
   </footer>
 
   <script>
-    const quoteText = [
+    const quotes = [
       "The quick brown fox jumps over the lazy dog",
       "Typing speed is fun to measure and improve",
       "Practice makes a man perfect in every skill",
@@ -102,63 +154,69 @@
       "Your future is created by what you do today"
     ];
 
-    let startTime, timerRunning = false, currentQuote = "", countdown, timeLeft = 30;
+    const captions = [
+      "Type like a pro!",
+      "Stay focused. Keep typing!",
+      "You're improving every second!",
+      "Don't give up!",
+      "Fast fingers, sharp mind!"
+    ];
 
-    const quoteEl = document.getElementById("quote");
+    const keyboardLayout = [
+      'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+      'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
+      'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'Space', 'Back'
+    ];
+
+    const keyboard = document.getElementById("keyboard");
     const inputEl = document.getElementById("input");
+    const quoteEl = document.getElementById("quote");
+    const captionEl = document.getElementById("caption");
     const statsEl = document.getElementById("stats");
-    const timerEl = document.getElementById("timer");
+
+    let startTime = 0;
+    let currentQuote = "";
 
     function startTest() {
+      currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteEl.innerText = currentQuote;
+      captionEl.innerText = captions[Math.floor(Math.random() * captions.length)];
       inputEl.value = "";
       inputEl.disabled = false;
       inputEl.focus();
       statsEl.innerText = "";
-      timeLeft = 30;
-      timerEl.innerText = "Time Left: 30s";
-
-      currentQuote = quoteText[Math.floor(Math.random() * quoteText.length)];
-      quoteEl.innerText = currentQuote;
-      timerRunning = true;
-
-      clearInterval(countdown);
-      countdown = setInterval(() => {
-        timeLeft--;
-        timerEl.innerText = `Time Left: ${timeLeft}s`;
-        if (timeLeft <= 0) {
-          clearInterval(countdown);
-          finishTest();
-        }
-      }, 1000);
-    }
-
-    function finishTest() {
-      timerRunning = false;
-      inputEl.disabled = true;
-
-      const typedText = inputEl.value.trim();
-      const originalWords = currentQuote.split(" ");
-      const typedWords = typedText.split(" ");
-
-      let correct = 0;
-      for (let i = 0; i < typedWords.length; i++) {
-        if (typedWords[i] === originalWords[i]) {
-          correct++;
-        }
-      }
-
-      const incorrect = typedWords.length - correct;
-      const wpm = Math.round((correct / 30) * 60);
-
-      statsEl.innerHTML = `
-        Correct Words: ${correct} <br>
-        Incorrect Words: ${incorrect} <br>
-        Speed: ${wpm} WPM
-      `;
+      startTime = new Date().getTime();
     }
 
     inputEl.addEventListener("input", () => {
-      if (!timerRunning) return;
+      if (inputEl.value === currentQuote) {
+        const endTime = new Date().getTime();
+        const timeTaken = (endTime - startTime) / 1000;
+        const words = inputEl.value.trim().split(/\s+/).length;
+        const wpm = Math.round((words / timeTaken) * 60);
+        statsEl.innerHTML = `Time: ${timeTaken.toFixed(2)} sec <br>Speed: ${wpm} WPM`;
+        inputEl.disabled = true;
+      }
+    });
+
+    // Create virtual keyboard
+    keyboardLayout.forEach(key => {
+      const keyButton = document.createElement("div");
+      keyButton.className = "key";
+      keyButton.innerText = key === "Space" ? "␣" : key;
+      keyButton.onclick = () => {
+        if (!inputEl.disabled) {
+          if (key === "Back") {
+            inputEl.value = inputEl.value.slice(0, -1);
+          } else if (key === "Space") {
+            inputEl.value += " ";
+          } else {
+            inputEl.value += key;
+          }
+          inputEl.dispatchEvent(new Event('input'));
+        }
+      };
+      keyboard.appendChild(keyButton);
     });
   </script>
 
