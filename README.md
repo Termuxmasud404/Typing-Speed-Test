@@ -19,7 +19,7 @@
 
 ## 🔗 Live Demo
 
-**▶️ [Click here to use the Typing Speed Test](https://Termuxmasud404.github.io/typing-speed-test/)**  
+**▶️ [Click here to use the Typing Speed Test]([https://termuxmasud404.github.io/Typing-Speed-Test/)**  
 *(Hosted on GitHub Pages — change link if needed)*
 
 ---
@@ -152,19 +152,25 @@ Hugging Face iframe API
 Font Awesome for Icons
 
 
-
 ---
 
-Developer Info
-
-<!-- Developer Info Section -->
-<section id="developer" style="text-align: center; padding: 30px; background: #111; color: white;">
-  <h2 style="color: #00ffff;">Developer Info</h2>
-  <p style="font-size: 18px;">Developed with ❤️ by <strong style="color: #ff9800;">Masud Rana</strong></p>
-  <p>GitHub: <a href="https://github.com/Termuxmasud404" target="_blank" style="color: #4fc3f7;">@Termuxmasud404</a></p>
-  <p>Facebook: <a href="https://www.facebook.com/profile.php?id=61576159807112" target="_blank" style="color: #2196f3;">Visit My Profile</a></p>
-  <p style="font-size: 14px; margin-top: 10px; color: #aaa;">© 2025 The Dream Chaser. All rights reserved.</p>
+<!-- Developer Info with Icons -->
+<section style="text-align: center; padding: 30px; background-color: #1c1c1c; color: #fff;">
+  <h2 style="font-size: 28px; color: #00e5ff;">Developer Info</h2>
+  <p style="font-size: 20px;">Created by <strong style="color: #ffb300;">Masud Rana</strong></p>
+  <div style="margin: 10px;">
+    <a href="https://github.com/Termuxmasud404" target="_blank" style="margin: 0 10px; color: #fff;">
+      <i class="fab fa-github" style="font-size: 24px;"></i> GitHub
+    </a>
+    <a href="https://www.facebook.com/profile.php?id=61576159807112" target="_blank" style="margin: 0 10px; color: #fff;">
+      <i class="fab fa-facebook" style="font-size: 24px;"></i> Facebook
+    </a>
+  </div>
+  <p style="font-size: 14px; margin-top: 10px; color: #ccc;">© 2025 The Dream Chaser. All rights reserved.</p>
 </section>
+
+<!-- Add Font Awesome CDN in head if not added -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 > Include this section at the bottom of your index.html. Make sure to also link Font Awesome if you use icons:
 
