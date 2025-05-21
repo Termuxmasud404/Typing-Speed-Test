@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Typing Speed Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f0f0f0;
+    }
+    #quote {
+      font-size: 22px;
+      margin-bottom: 20px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+    #input {
+      width: 100%;
+      max-width: 600px;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 5px;
+    }
+    #stats {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Typing Speed Tester</h1>
+
+  <div id="quote">Loading quote...</div>
+
+  <input type="text" id="input" placeholder="Start typing here..." disabled>
+
+  <div id="stats"></div>
+
+  <button onclick="startTest()">Start Test</button>
+
+  <script>
+    const quoteText = [
+      "The quick brown fox jumps over the lazy dog",
+      "Typing speed is fun to measure and improve",
+      "Practice makes a man perfect in every skill",
+      "JavaScript is powerful and versatile",
+      "Your future is created by what you do today"
+    ];
+
+    let startTime, timerRunning = false;
+    let currentQuote = "";
+
+    const quoteEl = document.getElementById("quote");
+    const inputEl = document.getElementById("input");
+    const statsEl = document.getElementById("stats");
+
+    function startTest() {
+      // Reset
+      inputEl.value = "";
+      inputEl.disabled = false;
+      inputEl.focus();
+      statsEl.innerText = "";
+      timerRunning = false;
+
+      // Random quote
+      currentQuote = quoteText[Math.floor(Math.random() * quoteText.length)];
+      quoteEl.innerText = currentQuote;
+    }
+
+    inputEl.addEventListener("input", () => {
+      if (!timerRunning) {
+        startTime = new Date().getTime();
+        timerRunning = true;
+      }
+
+      const typedText = inputEl.value;
+      if (typedText === currentQuote) {
+        const endTime = new Date().getTime();
+        const totalTime = (endTime - startTime) / 1000; // seconds
+        const words = typedText.trim().split(" ").length;
+        const speed = Math.round((words / totalTime) * 60);
+        statsEl.innerText = `Time: ${totalTime.toFixed(2)} sec | Words: ${words} | Speed: ${speed} WPM`;
+        inputEl.disabled = true;
+        timerRunning = false;
+      }
+    });
+  </script>
+
+</body>
+</html>
