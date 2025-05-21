@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Typing Speed Test</title>
+  <title>The Dream Chaser - Typing Test</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -10,14 +10,21 @@
       padding: 40px;
       background: #f0f0f0;
     }
+
+    header img {
+      width: 80px;
+      border-radius: 50%;
+    }
+
     #quote {
-      font-size: 22px;
+      font-size: 20px;
       margin-bottom: 20px;
       background: #fff;
       padding: 20px;
       border-radius: 10px;
       display: inline-block;
     }
+
     #input {
       width: 100%;
       max-width: 600px;
@@ -25,29 +32,66 @@
       font-size: 18px;
       border-radius: 5px;
     }
+
     #stats {
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 15px;
+      font-size: 17px;
     }
+
     button {
       margin-top: 20px;
       padding: 10px 20px;
       font-size: 16px;
       border-radius: 8px;
+      cursor: pointer;
+    }
+
+    #timer {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #d9534f;
+    }
+
+    #facebook {
+      margin-top: 30px;
+    }
+
+    #facebook a {
+      text-decoration: none;
+      background-color: #1877f2;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-weight: bold;
+      color: #555;
     }
   </style>
 </head>
 <body>
 
-  <h1>Typing Speed Tester</h1>
+  <header>
+    <img src="your-photo-url.jpg" alt="Masud Rana">
+    <h2>The Dream Chaser</h2>
+  </header>
 
-  <div id="quote">Loading quote...</div>
-
+  <div id="quote">Click Start to begin typing...</div>
   <input type="text" id="input" placeholder="Start typing here..." disabled>
-
+  <div id="timer">Time Left: 30s</div>
   <div id="stats"></div>
-
   <button onclick="startTest()">Start Test</button>
+
+  <div id="facebook">
+    <a href="https://www.facebook.com/your-profile" target="_blank">Visit My Facebook</a>
+  </div>
+
+  <footer>
+    Created by Masud Rana
+  </footer>
 
   <script>
     const quoteText = [
@@ -58,42 +102,63 @@
       "Your future is created by what you do today"
     ];
 
-    let startTime, timerRunning = false;
-    let currentQuote = "";
+    let startTime, timerRunning = false, currentQuote = "", countdown, timeLeft = 30;
 
     const quoteEl = document.getElementById("quote");
     const inputEl = document.getElementById("input");
     const statsEl = document.getElementById("stats");
+    const timerEl = document.getElementById("timer");
 
     function startTest() {
-      // Reset
       inputEl.value = "";
       inputEl.disabled = false;
       inputEl.focus();
       statsEl.innerText = "";
-      timerRunning = false;
+      timeLeft = 30;
+      timerEl.innerText = "Time Left: 30s";
 
-      // Random quote
       currentQuote = quoteText[Math.floor(Math.random() * quoteText.length)];
       quoteEl.innerText = currentQuote;
+      timerRunning = true;
+
+      clearInterval(countdown);
+      countdown = setInterval(() => {
+        timeLeft--;
+        timerEl.innerText = `Time Left: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+          clearInterval(countdown);
+          finishTest();
+        }
+      }, 1000);
+    }
+
+    function finishTest() {
+      timerRunning = false;
+      inputEl.disabled = true;
+
+      const typedText = inputEl.value.trim();
+      const originalWords = currentQuote.split(" ");
+      const typedWords = typedText.split(" ");
+
+      let correct = 0;
+      for (let i = 0; i < typedWords.length; i++) {
+        if (typedWords[i] === originalWords[i]) {
+          correct++;
+        }
+      }
+
+      const incorrect = typedWords.length - correct;
+      const wpm = Math.round((correct / 30) * 60);
+
+      statsEl.innerHTML = `
+        Correct Words: ${correct} <br>
+        Incorrect Words: ${incorrect} <br>
+        Speed: ${wpm} WPM
+      `;
     }
 
     inputEl.addEventListener("input", () => {
-      if (!timerRunning) {
-        startTime = new Date().getTime();
-        timerRunning = true;
-      }
-
-      const typedText = inputEl.value;
-      if (typedText === currentQuote) {
-        const endTime = new Date().getTime();
-        const totalTime = (endTime - startTime) / 1000; // seconds
-        const words = typedText.trim().split(" ").length;
-        const speed = Math.round((words / totalTime) * 60);
-        statsEl.innerText = `Time: ${totalTime.toFixed(2)} sec | Words: ${words} | Speed: ${speed} WPM`;
-        inputEl.disabled = true;
-        timerRunning = false;
-      }
+      if (!timerRunning) return;
     });
   </script>
 
