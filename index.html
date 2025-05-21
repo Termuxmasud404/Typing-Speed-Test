@@ -1,249 +1,301 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>The Dream Chaser - Typing Speed Test</title>
-  <style>
-    :root {
-      --light-bg: #f0f9ff;
-      --light-text: #333;
-      --dark-bg: #0f172a;
-      --dark-text: #f8fafc;
-      --primary: #3b82f6;
-    }body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #e0f2fe, var(--light-bg));
-  text-align: center;
-  padding: 30px;
-  color: var(--light-text);
-  transition: all 0.4s ease;
-}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Dream Chaser - Typing Speed Test</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-body.dark-mode {
-  background: linear-gradient(to right, #1e293b, var(--dark-bg));
-  color: var(--dark-text);
-}
+  /* Basic resets */
+  * {
+    box-sizing: border-box;
+  }
 
-.toggle-mode {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  padding: 8px 15px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-}
+  body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0; padding: 30px;
+    background: linear-gradient(to right, #e0f2fe, #f0f9ff);
+    color: #333;
+    transition: background 0.5s, color 0.5s;
+    overflow-x: hidden;
+  }
 
-header img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 3px solid var(--primary);
-}
+  /* Dark mode styles */
+  body.dark {
+    background: #121212;
+    color: #ddd;
+  }
 
-header h1 {
-  font-size: 28px;
-  color: #1d4ed8;
-}
+  /* Container */
+  header {
+    text-align: center;
+    margin-bottom: 15px;
+    position: relative;
+  }
 
-#quote {
-  font-size: 20px;
-  background: #fff;
-  padding: 15px;
-  border-radius: 10px;
-  max-width: 700px;
-  margin: 20px auto;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+  /* Blinking title */
+  #title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1d4ed8;
+    animation: slowBlink 4s linear infinite;
+    user-select: none;
+  }
 
-#caption {
-  font-size: 16px;
-  margin-top: 10px;
-  color: #2563eb;
-  font-style: italic;
-}
+  @keyframes slowBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
 
-#input {
-  width: 90%;
-  max-width: 700px;
-  padding: 12px;
-  font-size: 18px;
-  border: 2px solid #60a5fa;
-  border-radius: 6px;
-  margin-top: 10px;
-}
+  /* Profile Image */
+  header img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #3b82f6;
+    display: block;
+    margin: 15px auto;
+  }
 
-.keyboard-box {
-  border: 2px solid #3b82f6;
-  border-radius: 8px;
-  padding: 10px;
-  margin: 10px auto;
-  max-width: 750px;
-}
+  /* Caption below quote */
+  #caption {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #2563eb;
+    font-style: italic;
+    user-select: none;
+  }
 
-.key {
-  display: inline-block;
-  padding: 10px 15px;
-  margin: 5px;
-  background: #e2e8f0;
-  border-radius: 5px;
-  cursor: pointer;
-  user-select: none;
-  color: #1e3a8a;
-  font-weight: bold;
-}
+  /* Quote box */
+  #quote {
+    font-size: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    max-width: 700px;
+    margin: 15px auto;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: background 0.5s, color 0.5s;
+  }
 
-.key:hover {
-  background: #cbd5e1;
-}
+  body.dark #quote {
+    background: #1e1e1e;
+    color: #eee;
+  }
 
-#stats {
-  margin-top: 20px;
-  font-size: 18px;
-}
+  /* Input box */
+  #input {
+    width: 90%;
+    max-width: 700px;
+    padding: 12px;
+    font-size: 18px;
+    border: 2px solid #60a5fa;
+    border-radius: 6px;
+    margin-top: 10px;
+    transition: background 0.5s, color 0.5s, border-color 0.5s;
+  }
 
-#facebook a {
-  display: inline-block;
-  margin-top: 20px;
-  background: #1877f2;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  text-decoration: none;
-}
+  body.dark #input {
+    background: #333;
+    color: #eee;
+    border-color: #3b82f6;
+  }
 
-#developer {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #555;
-}
+  /* Buttons */
+  button {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    font-size: 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    user-select: none;
+  }
 
-footer {
-  margin-top: 40px;
-  font-size: 15px;
-  color: #555;
-}
+  button:hover {
+    background-color: #1e40af;
+  }
 
-footer strong {
-  display: block;
-  margin-bottom: 4px;
-}
+  /* Facebook Button */
+  #facebook a {
+    display: inline-block;
+    margin-top: 20px;
+    background: #1877f2;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(24,119,242,0.5);
+    transition: background 0.3s;
+    user-select: none;
+  }
 
-footer span {
-  font-size: 14px;
-  color: #6b7280;
-}
+  #facebook a:hover {
+    background: #0f56c0;
+  }
 
-  </style>
+  /* Developer text */
+  #developer {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #4b5563; /* nice gray */
+    user-select: none;
+  }
+
+  body.dark #developer {
+    color: #9ca3af;
+  }
+
+  /* Stats */
+  #stats {
+    margin-top: 20px;
+    font-size: 18px;
+    user-select: none;
+  }
+
+  /* Light/Dark toggle button */
+  #modeToggle {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    padding: 8px 15px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    box-shadow: 0 3px 8px rgba(37,99,235,0.6);
+    transition: background-color 0.3s;
+    z-index: 1000;
+  }
+  #modeToggle:hover {
+    background: #1e40af;
+  }
+
+  /* Keyboard containers */
+  #keyboardContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+  }
+
+  .keyboardBox {
+    background: #e2e8f0;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    user-select: none;
+    width: 320px;
+    transition: background 0.5s, color 0.5s;
+  }
+
+  body.dark .keyboardBox {
+    background: #2a2a2a;
+  }
+
+  .keyboardLine {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .key {
+    background: #f3f4f6;
+    color: #111827;
+    padding: 12px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 600;
+    font-size: 18px;
+    box-shadow: 0 2px 6px rgb(0 0 0 / 0.1);
+    flex: 1 0 30px;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .key:hover {
+    background: #d1d5db;
+  }
+
+  body.dark .key {
+    background: #3b3b3b;
+    color: #ddd;
+  }
+
+  body.dark .key:hover {
+    background: #555;
+  }
+
+  /* Special keys bigger */
+  .key.space {
+    flex: 1 0 100px;
+  }
+  .key.back {
+    flex: 1 0 60px;
+    background: #ef4444;
+    color: white;
+  }
+  .key.back:hover {
+    background: #b91c1c;
+  }
+
+  /* Rainbow color animation for quotes */
+  #quote span.rainbow {
+    background: linear-gradient(
+      to right,
+      red, orange, yellow, green, blue, indigo, violet
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: rainbowAnim 10s linear infinite;
+    display: inline-block;
+  }
+
+  @keyframes rainbowAnim {
+    0% { background-position: 0% }
+    100% { background-position: 200% }
+  }
+
+  /* Error highlight */
+  #input.error {
+    border-color: #ef4444 !important;
+    background-color: #fee2e2 !important;
+    color: #b91c1c !important;
+  }
+
+  /* Scroll animation for quote and caption */
+  #quote, #caption {
+    opacity: 0;
+    transform: translateY(30px);
+    animation-fill-mode: forwards;
+  }
+
+  #quote.visible, #caption.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation-duration: 1s;
+  }
+
+  /* Scroll animations */
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+</style>
 </head>
 <body>
-  <button class="toggle-mode" onclick="toggleMode()">Toggle Mode</button>
-  <header>
-    <img src="masud.jpg" alt="Masud Rana">
-    <h1>The Dream Chaser</h1>
-  </header>  <div id="quote">Click "Start Test" to begin typing...</div>
-  <div id="caption">"Practice every day. Greatness takes time."</div>  <input type="text" id="input" placeholder="Start typing here..." disabled>  <div class="keyboard-box" id="keyboard-upper"></div>
-  <div class="keyboard-box" id="keyboard-lower"></div><button onclick="startTest()">Start Test</button>
 
-  <div id="stats"></div>  <div id="facebook">
-    <a href="https://www.facebook.com/profile.php?id=61576159807112" target="_blank">Visit My Facebook</a>
-  </div>
-  <div id="developer">Developer By Masud Rana</div>  <footer>
-    <strong>© 2025 The Dream Chaser Zone</strong>
-    <span>Created by Termuxmasud404</span>
-  </footer>  <script>
-    const quotes = [
-      "The quick brown fox jumps over the lazy dog",
-      "Typing speed is fun to measure and improve",
-      "Practice makes a man perfect in every skill",
-      "JavaScript is powerful and versatile",
-      "Your future is created by what you do today",
-      "Stay positive, work hard, make it happen",
-      "Success doesn't come to you. You go to it.",
-      "Every day is a second chance",
-      "Dream big, work bigger",
-      "Typing helps you think better",
-      "Accuracy is more important than speed",
-      "Be consistent, not perfect",
-      "Fail, learn, improve, repeat",
-      "Programming is a superpower",
-      "Create more, consume less",
-      "Your mind is your best tool",
-      "Keep typing until it becomes effortless",
-      "Make your fingers fly",
-      "You can achieve anything with practice",
-      "Discipline beats motivation"
-      // Add more up to 100 as needed...
-    ];
-
-    const captions = [
-      "Type like a pro!",
-      "Stay focused. Keep typing!",
-      "You're improving every second!",
-      "Don't give up!",
-      "Fast fingers, sharp mind!"
-    ];
-
-    const upperKeys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-    const lowerKeys = 'abcdefghijklmnopqrstuvwxyz'.split('');
-
-    const keyboardUpper = document.getElementById("keyboard-upper");
-    const keyboardLower = document.getElementById("keyboard-lower");
-    const inputEl = document.getElementById("input");
-    const quoteEl = document.getElementById("quote");
-    const captionEl = document.getElementById("caption");
-    const statsEl = document.getElementById("stats");
-
-    let startTime = 0;
-    let currentQuote = "";
-
-    function startTest() {
-      currentQuote = quotes[Math.floor(Math.random() * quotes.length)];
-      quoteEl.innerText = currentQuote;
-      captionEl.innerText = captions[Math.floor(Math.random() * captions.length)];
-      inputEl.value = "";
-      inputEl.disabled = false;
-      inputEl.focus();
-      statsEl.innerText = "";
-      startTime = new Date().getTime();
-    }
-
-    inputEl.addEventListener("input", () => {
-      const typed = inputEl.value;
-      if (typed === currentQuote) {
-        const endTime = new Date().getTime();
-        const timeTaken = (endTime - startTime) / 1000;
-        const words = typed.trim().split(/\s+/).length;
-        const wpm = Math.round((words / timeTaken) * 60);
-        const accuracy = Math.round((typed.length / currentQuote.length) * 100);
-        statsEl.innerHTML = `Time: ${timeTaken.toFixed(2)} sec <br>Speed: ${wpm} WPM <br>Accuracy: ${accuracy}%`;
-        inputEl.disabled = true;
-      } else {
-        inputEl.style.borderColor = typed === currentQuote.substring(0, typed.length) ? '#60a5fa' : 'red';
-      }
-    });
-
-    function createKeyboard(layout, container) {
-      layout.forEach(key => {
-        const keyButton = document.createElement("div");
-        keyButton.className = "key";
-        keyButton.innerText = key;
-        keyButton.onclick = () => {
-          if (!inputEl.disabled) {
-            inputEl.value += key;
-            inputEl.dispatchEvent(new Event('input'));
-          }
-        };
-        container.appendChild(keyButton);
-      });
-    }
-
-    createKeyboard(upperKeys, keyboardUpper);
-    createKeyboard(lowerKeys, keyboardLower);
-
-    function toggleMode() {
-      document.body.classList.toggle("dark-mode");
-    }
-  </script></body>
-</html>
+  <button id="modeToggle" aria-label="Toggle Light/Dark Mode">Dark Mode
